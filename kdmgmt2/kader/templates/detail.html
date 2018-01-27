@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>{{ member.name }}, {{ member.first_name }}</h2>
+        <table>
+            <tr>
+                <td class="col-md-3">Birthdate:</td>
+                <td>{{ member.birth_date }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">Gender:</td>
+                <td>{{ member.gender }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">Grade:</td>
+                <td>{{ member.grade }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">Email:</td>
+                <td>{{ member.email }}</td>
+            </tr>
+            <tr>
+                <td class="col-md-3">Zekken:</td>
+                <td><input name="zekken" id="zekken" type="checkbox" disabled="disabled"
+                                   {% if member.zekken %} checked="checked" {% endif %}></td>
+            </tr>
+            <tr>
+                <td class="col-md-3">Jacket:</td>
+                <td><input name="jacket" id="jacket" type="checkbox" disabled="disabled"
+                           {% if member.jacket %} checked="checked" {% endif %}></td>
+            </tr>
+            <tr>
+                <td class="col-md-3">Active:</td>
+                <td><input name="active" id="active" type="checkbox" disabled="disabled"
+                           {% if member.active %} checked="checked" {% endif %}></td>
+            </tr>
+        </table>
+    </div>
+</div>
+{% endblock %}
