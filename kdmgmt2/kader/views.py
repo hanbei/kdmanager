@@ -1,6 +1,6 @@
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 
@@ -50,18 +50,22 @@ class MemberDetailView(LoginRequiredMixin, generic.DetailView):
     login_url = reverse_lazy('home')
 
 
-class MemberCreate(CreateView):
+class MemberCreate(PermissionRequiredMixin, CreateView):
+    permission_required = 'kader.add_member'
     model = Member
     fields = ['name', 'first_name', 'birth_date', 'gender', 'grade', 'email', 'zekken', 'jacket', 'active']
     success_url = reverse_lazy('home')
+    login_url = reverse_lazy('login')
 
-
-class MemberUpdate(UpdateView):
+class MemberUpdate(PermissionRequiredMixin, UpdateView):
+    permission_required = 'kader.change_member'
     model = Member
     fields = ['name', 'first_name', 'birth_date', 'gender', 'grade', 'email', 'zekken', 'jacket', 'active']
     success_url = reverse_lazy('home')
+    login_url = reverse_lazy('login')
 
-
-class MemberDelete(DeleteView):
+class MemberDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = 'kader.delete_member'
     model = Member
     success_url = reverse_lazy('home')
+    login_url = reverse_lazy('login')
