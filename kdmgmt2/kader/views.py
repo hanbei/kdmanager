@@ -6,6 +6,7 @@ from django.urls import reverse, reverse_lazy
 
 # Create your views here.
 from django.views import generic
+from django.views.generic import CreateView, UpdateView, DeleteView
 
 from .models import Member
 
@@ -47,3 +48,20 @@ class MemberDetailView(LoginRequiredMixin, generic.DetailView):
     model = Member
     template_name = 'detail.html'
     login_url = reverse_lazy('home')
+
+
+class MemberCreate(CreateView):
+    model = Member
+    fields = ['name', 'first_name', 'birth_date', 'gender', 'grade', 'email', 'zekken', 'jacket', 'active']
+    success_url = reverse_lazy('home')
+
+
+class MemberUpdate(UpdateView):
+    model = Member
+    fields = ['name', 'first_name', 'birth_date', 'gender', 'grade', 'email', 'zekken', 'jacket', 'active']
+    success_url = reverse_lazy('home')
+
+
+class MemberDelete(DeleteView):
+    model = Member
+    success_url = reverse_lazy('home')
