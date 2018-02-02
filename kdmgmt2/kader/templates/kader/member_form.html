@@ -3,9 +3,14 @@
 {% block content %}
 <div class="row">
     <div class="col-md-12">
-        <form action="" method="post">{% csrf_token %}
-            {{ form.as_p }}
-            <input type="submit" value="Update"/>
+        <h1>Member:</h1>
+        <form action="" method="post">
+            <table>
+                {% csrf_token %}
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Save"/>
+            <input type="submit" formnovalidate name="cancel" value="Cancel"/>
         </form>
     </div>
 </div>

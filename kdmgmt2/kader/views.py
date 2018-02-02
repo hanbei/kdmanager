@@ -57,6 +57,12 @@ class MemberCreate(PermissionRequiredMixin, CreateView):
     success_url = reverse_lazy('home')
     login_url = reverse_lazy('login')
 
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return redirect(reverse_lazy('home'))
+        else:
+            return super(MemberCreate, self).post(request, *args, **kwargs)
+
 class MemberUpdate(PermissionRequiredMixin, UpdateView):
     permission_required = 'kader.change_member'
     model = Member
@@ -64,8 +70,20 @@ class MemberUpdate(PermissionRequiredMixin, UpdateView):
     success_url = reverse_lazy('home')
     login_url = reverse_lazy('login')
 
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return redirect(reverse_lazy('home'))
+        else:
+            return super(MemberUpdate, self).post(request, *args, **kwargs)
+
 class MemberDelete(PermissionRequiredMixin, DeleteView):
     permission_required = 'kader.delete_member'
     model = Member
     success_url = reverse_lazy('home')
     login_url = reverse_lazy('login')
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return redirect(reverse_lazy('home'))
+        else:
+            return super(MemberDelete, self).post(request, *args, **kwargs)

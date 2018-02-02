@@ -2,8 +2,20 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-11">
         <h2>{{ member.name }}, {{ member.first_name }}</h2>
+    </div>
+    <div class="col-md-1">
+        <h2>
+            {% if perms.kader.change_member %}
+            <a href="{% url 'edit' member.id %}"><i class="far fa-edit"></i></a>
+            {% endif %}
+            {% if perms.kader.delete_member %}
+            <a href="{% url 'delete' member.id %}"><i class="far fa-trash-alt"></i></a>
+            {% endif %}
+        </h2>
+    </div>
+    <div class="col-md-12">
         <table>
             <tr>
                 <td class="col-md-3">Birthdate:</td>
@@ -23,18 +35,33 @@
             </tr>
             <tr>
                 <td class="col-md-3">Zekken:</td>
-                <td><input name="zekken" id="zekken" type="checkbox" disabled="disabled"
-                                   {% if member.zekken %} checked="checked" {% endif %}></td>
+                <td>
+                    {% if member.zekken %}
+                    <i class="far fa-check-square"></i>
+                    {% else %}
+                    <i class="far fa-square"></i>
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <td class="col-md-3">Jacket:</td>
-                <td><input name="jacket" id="jacket" type="checkbox" disabled="disabled"
-                           {% if member.jacket %} checked="checked" {% endif %}></td>
+                <td>
+                    {% if member.jacket %}
+                    <i class="far fa-check-square"></i>
+                    {% else %}
+                    <i class="far fa-square"></i>
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <td class="col-md-3">Active:</td>
-                <td><input name="active" id="active" type="checkbox" disabled="disabled"
-                           {% if member.active %} checked="checked" {% endif %}></td>
+                <td>
+                    {% if member.jacket %}
+                    <i class="far fa-check-square"></i>
+                    {% else %}
+                    <i class="far fa-square"></i>
+                    {% endif %}
+                </td>
             </tr>
         </table>
     </div>

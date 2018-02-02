@@ -4,8 +4,10 @@
 <div class="row">
     <div class="col-md-12">
         <form action="" method="post">{% csrf_token %}
+            <label>Delete '{{ member.first_name }} {{ member.name }}' ?</label><br/>
             {{ form.as_p }}
             <input type="submit" value="Delete"/>
+            <input type="submit" name="cancel" value="Cancel" />
         </form>
     </div>
 </div>
