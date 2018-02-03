@@ -1,5 +1,8 @@
 from django import forms
 
+from kdmgmt2.kader.models import Member
+
+
 class MemberForm(forms.Form):
     name = forms.CharField(max_length=100)
     first_name = forms.CharField(max_length=100)
@@ -27,3 +30,7 @@ class MemberForm(forms.Form):
     ])
     zekken = forms.BooleanField()
     jacket = forms.BooleanField()
+
+class AttendanceForm(forms.Form):
+    date = forms.DateField()
+    members = forms.ModelMultipleChoiceField(Member.objects.all())

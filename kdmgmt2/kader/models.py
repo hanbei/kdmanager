@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Member(models.Model):
     name = models.CharField(max_length=100)
@@ -28,6 +29,10 @@ class Member(models.Model):
     ])
     zekken = models.BooleanField()
     jacket = models.BooleanField()
+
+    def __str__(self):
+        return self.name + ", " + self.first_name
+
 
 class Attendance(models.Model):
     date = models.DateField()

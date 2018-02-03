@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <h1>Attendance:</h1>
+        <form action="" method="post">
+            <table>
+                {% csrf_token %}
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Save"/>
+            <input type="submit" formnovalidate name="cancel" value="Cancel"/>
+        </form>
+    </div>
+</div>
+{% endblock %}
