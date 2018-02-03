@@ -28,3 +28,7 @@ class Member(models.Model):
     ])
     zekken = models.BooleanField()
     jacket = models.BooleanField()
+
+class Attendance(models.Model):
+    date = models.DateField()
+    attended = models.ManyToManyField(Member)
