@@ -30,13 +30,8 @@ def logout(request):
     return redirect(reverse('login'))
 
 
-@login_required(login_url=reverse_lazy('login'))
-def home(request):
-    return render(request, 'home.html')
-
-
 class MemberListView(LoginRequiredMixin, generic.ListView):
-    template_name = 'home.html'
+    template_name = 'kader/member_list.html'
     context_object_name = 'members'
     login_url = reverse_lazy('login')
 
@@ -46,7 +41,7 @@ class MemberListView(LoginRequiredMixin, generic.ListView):
 
 class MemberDetailView(LoginRequiredMixin, generic.DetailView):
     model = Member
-    template_name = 'detail.html'
+    template_name = 'kader/member_detail.html'
     login_url = reverse_lazy('home')
 
 
