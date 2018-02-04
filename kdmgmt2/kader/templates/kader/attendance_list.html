@@ -14,7 +14,7 @@
         {% if attendances %}
         {% for attendance in attendances %}
         <h3>
-            Date: {{ attendance.date }}
+            <a href="{% url 'attendance_detail' attendance.id %}">Date: {{ attendance.date }}</a>
             {% if perms.kader.change_member %}
             <a href="{% url 'attendance_edit' attendance.id %}"><i class="far fa-edit"></i></a>
             {% endif %}
@@ -31,7 +31,7 @@
         </ul>
         {% endfor %}
         {% else %}
-        <p>No members are available.</p>
+        <p>No attendances are available.</p>
         {% endif %}
     </div>
 </div>
