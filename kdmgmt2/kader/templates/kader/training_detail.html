@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-11">
+        <h1>Training:</h1>
+    </div>
+    <div class="col-md-1">
+        <h2>
+            {% if perms.kader.change_member %}
+            <a href="{% url 'training_edit' training.id %}"><i class="far fa-edit"></i></a>
+            {% endif %}
+            {% if perms.kader.delete_member %}
+            <a href="{% url 'training_delete' training.id %}"><i class="far fa-trash-alt"></i></a>
+            {% endif %}
+        </h2>
+    </div>
+    <div class="col-md-12">
+        {% if training %}
+        <h3>
+            Date: {{ training.date }}
+        </h3>
+        <ul>
+            {% for member in training.attended.all %}
+            <li>
+                {{ member.name }} {{ member.first_name }}
+            </li>
+            {% endfor %}
+        </ul>
+        <h2>Fights:</h2>
+        <table>
+            {% for fight in training.fights.all %}
+            <tr>
+                <td class="col-md-3 text-right">
+                    {{ fight.red.first_name }}{{ fight.red.name }}
+                </td>
+                <td class="col-md-2 text-right">
+                    {% if fight.white_point_two %}
+                    {{ fight.white_point_two }}
+                    {% endif %}
+                    {% if fight.white_point_one %}
+                    {{ fight.white_point_one }}
+                    {% endif %}
+                </td>
+                <td class="col-md-2 text-left">
+                    {% if fight.red_point_one %}
+                    {{ fight.red_point_one }}
+                    {% endif %}
+                    {% if fight.red_point_two %}
+                    {{ fight.red_point_two }}
+                    {% endif %}
+                </td>
+                <td class="col-md-3 text-left">
+                    {{ fight.white.first_name }} {{ fight.white.name }}
+                </td>
+            </tr>
+        </table>
+        {% endfor %}
+        {% else %}
+        <p>No trainings are available.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

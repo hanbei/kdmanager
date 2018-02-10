@@ -9,12 +9,14 @@ urlpatterns = [
     path('<int:pk>/edit/', views.MemberUpdate.as_view(), name='edit'),
     path('<int:pk>/delete/', views.MemberDelete.as_view(), name='delete'),
 
-    path('attendance', views.AttendanceListView.as_view(), name='attendance_list'),
-    path('attendance/create', views.AttendanceCreateView.as_view(), name='attendance_create'),
-    path('attendance/<int:pk>', views.AttendanceDetailView.as_view(), name='attendance_detail'),
-    path('attendance/<int:pk>/edit', views.AttendanceUpdateView.as_view(), name='attendance_edit'),
-    path('attendance/<int:pk>/delete', views.AttendanceDeleteView.as_view(), name='attendance_delete'),
+    path('training', views.TrainingListView.as_view(), name='training_list'),
+    path('training/create', views.TrainingCreateView.as_view(), name='training_create'),
+    path('training/<int:pk>', views.TrainingDetailView.as_view(), name='training_detail'),
+    path('training/<int:pk>/edit', views.TrainingUpdateView.as_view(), name='training_edit'),
+    path('training/<int:pk>/delete', views.TrainingDeleteView.as_view(), name='training_delete'),
 
+    path('fight', views.FightCreateView.as_view(), name='fight_create'),
+    path('fight/<int:pk>', views.FightDetailView.as_view(), name='fight_detail'),
 
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),

@@ -1,6 +1,7 @@
 from django import forms
 
-from kdmgmt2.kader.models import Member
+from kdmgmt2.kader import models
+from kdmgmt2.kader.models import Member, Fight
 
 
 class MemberForm(forms.Form):
@@ -12,25 +13,20 @@ class MemberForm(forms.Form):
     gender = forms.CharField(max_length=1, choices=(("m", "male"), ("f", "female")))
     active = forms.BooleanField()
 
-    grade = forms.CharField(max_length=10, null=True, blank=True, choices=[
-        ("6K", "6. Kyu"),
-        ("5K", "5. Kyu"),
-        ("4K", "4. Kyu"),
-        ("3K", "3. Kyu"),
-        ("2K", "2. Kyu"),
-        ("1K", "1. Kyu"),
-        ("1D", "1. Dan"),
-        ("2D", "2. Dan"),
-        ("3D", "3. Dan"),
-        ("4D", "4. Dan"),
-        ("5D", "5. Dan"),
-        ("6D", "6. Dan"),
-        ("7D", "7. Dan"),
-        ("8D", "8. Dan")
-    ])
+    grade = forms.CharField(max_length=10, null=True, blank=True, choices=models.GRADES)
     zekken = forms.BooleanField()
     jacket = forms.BooleanField()
 
-class AttendanceForm(forms.Form):
+
+class TrainingForm(forms.Form):
     date = forms.DateField()
     members = forms.ModelMultipleChoiceField(Member.objects.all())
+
+
+class FightForm(forms.Form):
+    red = forms.ModelMultipleChoiceField(Fight.objects.all())
+    white = forms.ModelMultipleChoiceField(Fight.objects.all())
+    red_point_one = forms.CharField(max_length=1, null=True, blank=True, choices=models.POINTS)
+    red_point_two = forms.CharField(max_length=1, null=True, blank=True, choices=models.POINTS)
+    white_point_one = forms.CharField(max_length=1, null=True, blank=True, choices=models.POINTS)
+    white_point_two = forms.CharField(max_length=1, null=True, blank=True, choices=models.POINTS)

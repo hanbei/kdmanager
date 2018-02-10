@@ -3,27 +3,27 @@
 {% block content %}
 <div class="row">
     <div class="col-md-11">
-        <h1>Attendance</h1>
+        <h1>Training</h1>
     </div>
     <div class="col-md-1">
         {% if perms.kader.add_member %}
-        <h1><a href="{% url 'attendance_create' %}"><i class="far fa-plus-square"></i></a></h1>
+        <h1><a href="{% url 'training_create' %}"><i class="far fa-plus-square"></i></a></h1>
         {% endif %}
     </div>
     <div class="col-md-12">
-        {% if attendances %}
-        {% for attendance in attendances %}
+        {% if trainings %}
+        {% for training in trainings %}
         <h3>
-            <a href="{% url 'attendance_detail' attendance.id %}">Date: {{ attendance.date }}</a>
+            <a href="{% url 'training_detail' training.id %}">Date: {{ training.date }}</a>
             {% if perms.kader.change_member %}
-            <a href="{% url 'attendance_edit' attendance.id %}"><i class="far fa-edit"></i></a>
+            <a href="{% url 'training_edit' training.id %}"><i class="far fa-edit"></i></a>
             {% endif %}
             {% if perms.kader.delete_member %}
-            <a href="{% url 'attendance_delete' attendance.id %}"><i class="far fa-trash-alt"></i></a>
+            <a href="{% url 'training_delete' training.id %}"><i class="far fa-trash-alt"></i></a>
             {% endif %}
         </h3>
         <ul>
-            {% for member in attendance.attended.all %}
+            {% for member in training.attended.all %}
             <li>
                 {{ member.name }} {{ member.first_name }}
             </li>
@@ -31,7 +31,7 @@
         </ul>
         {% endfor %}
         {% else %}
-        <p>No attendances are available.</p>
+        <p>No trainings are available.</p>
         {% endif %}
     </div>
 </div>
