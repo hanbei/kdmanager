@@ -1,8 +1,7 @@
 from django.contrib import auth
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
-
 # Create your views here.
 from django.views import generic
 from django.views.generic import CreateView, UpdateView, DeleteView
@@ -118,12 +117,16 @@ class TrainingUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'kader.change_member'
     model = Training
     fields = ['date', 'attended']
-    success_url = reverse_lazy('training_list')
+    # success_url = reverse_lazy('training_list')
     login_url = reverse_lazy('login')
+
+    def get_success_url(self):
+        # reverse('training_detail', args=(self.kwargs['pk'],))
+        return reverse_lazy('training_detail', args=(self.kwargs['pk'],))
 
     def post(self, request, *args, **kwargs):
         if "cancel" in request.POST:
-            return redirect(reverse_lazy('training_list'))
+            return redirect(reverse_lazy('training_detail', args=(self.kwargs['pk'],)))
         else:
             return super(TrainingUpdateView, self).post(request, *args, **kwargs)
 
@@ -140,20 +143,51 @@ class TrainingDeleteView(PermissionRequiredMixin, DeleteView):
         else:
             return super(TrainingDeleteView, self).post(request, *args, **kwargs)
 
+
 class FightDetailView(LoginRequiredMixin, generic.DetailView):
     model = Fight
     template_name = 'kader/fight_detail.html'
     login_url = reverse_lazy('fight_detail')
 
+
 class FightCreateView(PermissionRequiredMixin, CreateView):
     permission_required = 'kader.add_member'
     model = Fight
-    fields = ['red','white','red_point_one','red_point_two','white_point_one','white_point_two']
-    success_url = reverse_lazy('home')
+    fields = ['red', 'white', 'red_point_one', 'red_point_two', 'white_point_one', 'white_point_two']
     login_url = reverse_lazy('login')
 
     def post(self, request, *args, **kwargs):
         if "cancel" in request.POST:
-            return redirect(reverse_lazy('training_list'))
+            return redirect(reverse_lazy('training_detail', args=(self.kwargs['training_pk'],)))
         else:
             return super(FightCreateView, self).post(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('training_detail', args=(self.kwargs['training_pk'],))
+
+    def dispatch(self, request, *args, **kwargs):
+        self.training = get_object_or_404(Training, pk=kwargs['training_pk'])
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        """
+        Overridden to add the ipsum relation to the `Lorem` instance.
+        """
+        form.instance.training = self.training
+        return super().form_valid(form)
+
+
+class FightUpdateView(PermissionRequiredMixin, UpdateView):
+    permission_required = 'kader.add_member'
+    model = Fight
+    fields = ['red', 'white', 'red_point_one', 'red_point_two', 'white_point_one', 'white_point_two']
+    login_url = reverse_lazy('login')
+
+    def post(self, request, *args, **kwargs):
+        if "cancel" in request.POST:
+            return redirect(reverse_lazy('training_detail', args=(self.kwargs['training_pk'],)))
+        else:
+            return super(FightUpdateView, self).post(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse('training_detail', args=(self.kwargs['training_pk'],))

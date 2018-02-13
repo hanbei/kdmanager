@@ -15,8 +15,9 @@ urlpatterns = [
     path('training/<int:pk>/edit', views.TrainingUpdateView.as_view(), name='training_edit'),
     path('training/<int:pk>/delete', views.TrainingDeleteView.as_view(), name='training_delete'),
 
-    path('fight', views.FightCreateView.as_view(), name='fight_create'),
-    path('fight/<int:pk>', views.FightDetailView.as_view(), name='fight_detail'),
+    path('training/<int:training_pk>/fight', views.FightCreateView.as_view(), name='fight_create'),
+    path('training/<int:training_pk>/fight/<int:pk>', views.FightDetailView.as_view(), name='fight_detail'),
+    path('training/<int:training_pk>/fight/<int:pk>/edit', views.FightUpdateView.as_view(), name='fight_update'),
 
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
