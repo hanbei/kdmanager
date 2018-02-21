@@ -1,0 +1,4 @@
+Name, First Name, Birth date, Gender, Grade, Email, Zekken, Jacket, Active
+{% for row in data %}
+"{{ row.name|addslashes }}", "{{ row.first_name|addslashes }}", "{{ row.birth_date|addslashes }}", "{{ row.gender|addslashes }}", "{{ row.grade|addslashes }}", "{{ row.email|addslashes }}", "{{ row.zekken|addslashes }}", "{{ row.jacket|addslashes }}", "{{ row.active|addslashes }}"
+{% endfor %}
