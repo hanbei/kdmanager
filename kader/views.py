@@ -1,6 +1,9 @@
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.template import loader
 from django.urls import reverse, reverse_lazy
 # Create your views here.
 from django.views import generic
@@ -26,6 +29,22 @@ def login(request):
 def logout(request):
     auth.logout(request)
     return redirect(reverse('login'))
+
+@login_required
+def export_members_to_csv(request):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="kader.csv"'
+
+    csv_data = Member.objects.all().order_by('name')
+
+    t = loader.get_template('kader/csv.txt')
+    c = {
+        'data': csv_data,
+    }
+    response.write(t.render(c))
+    return response
+
 
 
 class MemberListView(LoginRequiredMixin, generic.ListView):
