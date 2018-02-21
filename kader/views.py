@@ -8,7 +8,10 @@ from django.urls import reverse, reverse_lazy
 # Create your views here.
 from django.views import generic
 from django.views.generic import CreateView, UpdateView, DeleteView
+from django_tables2 import SingleTableView
+from django_tables2.export import ExportMixin
 
+from kader.tables import MemberTable
 from .models import Member, Training, Fight
 
 
@@ -61,10 +64,11 @@ def export_training_to_csv(request, pk):
     return response
 
 
-class MemberListView(LoginRequiredMixin, generic.ListView):
+class MemberListView(LoginRequiredMixin, ExportMixin, SingleTableView):
     template_name = 'kader/member_list.html'
     context_object_name = 'members'
     login_url = reverse_lazy('login')
+    table_class = MemberTable
 
     def get_queryset(self):
         return Member.objects.order_by('name')

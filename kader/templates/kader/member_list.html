@@ -1,5 +1,7 @@
 {% extends 'layout.html' %}
 
+{% load render_table from django_tables2 %}
+
 {% block content %}
 <div class="row">
     <div class="col-md-11">
@@ -17,57 +19,9 @@
     {% endif %}
     <div class="col-md-12">
         {% if members %}
-        <table class="table col-md-12 table-striped">
-            <tr>
-                <th class="col-md-1" width="20%">Name</th>
-                <th class="col-md-1">Birthdate</th>
-                <th class="col-md-1">Gender</th>
-                <th class="col-md-1">Grade</th>
-                <th class="col-md-1">Email</th>
-                <th class="col-md-1">Zekken</th>
-                <th class="col-md-1">Jacket</th>
-                <th class="col-md-1">Active</th>
-                <th class="col-md-1"></th>
-            </tr>
-            {% for member in members %}
-            <tr>
-                <td class="col-md-1" width="20%"><a href="{% url 'detail' member.id %}">{{ member.name }}
-                    {{ member.first_name }}</a></td>
-                <td class="col-md-1">{{ member.birth_date }}</td>
-                <td class="col-md-1">{{ member.gender }}</td>
-                <td class="col-md-1">{{ member.grade }}</td>
-                <td class="col-md-1">{{ member.email }}</td>
-                <td class="col-md-1">
-                    {% if member.zekken %}
-                    <i class="far fa-check-square"></i>
-                    {% else %}
-                    <i class="far fa-square"></i>
-                    {% endif %}
-                </td>
-                <td class="col-md-1">
-                    {% if member.jacket %}
-                    <i class="far fa-check-square"></i>
-                    {% else %}
-                    <i class="far fa-square"></i>
-                    {% endif %}
-                </td>
-                <td class="col-md-1">
-                    {% if member.active %}
-                    <i class="far fa-check-square"></i>
-                    {% else %}
-                    <i class="far fa-square"></i>
-                    {% endif %}
-                <td>
-                    {% if perms.kader.change_member %}
-                    <a href="{% url 'edit' member.id %}"><i class="far fa-edit"></i></a>
-                    {% endif %}
-                    {% if perms.kader.delete_member %}
-                    <a href="{% url 'delete' member.id %}"><i class="far fa-trash-alt"></i></a>
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
+        <div class="col-md-12">
+            {% render_table table %}
+        </div>
         {% else %}
         <p>No members are available.</p>
         {% endif %}
