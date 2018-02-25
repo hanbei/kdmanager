@@ -13,22 +13,85 @@
     <div class="col-md-12">
         {% if trainings %}
         {% for training in trainings %}
-        <h3>
-            <a href="{% url 'training_detail' training.id %}">Date: {{ training.date }}</a>
-            {% if perms.kader.change_member %}
-            <a href="{% url 'training_edit' training.id %}"><i class="far fa-edit"></i></a>
-            {% endif %}
-            {% if perms.kader.delete_member %}
-            <a href="{% url 'training_delete' training.id %}"><i class="far fa-trash-alt"></i></a>
-            {% endif %}
-        </h3>
-        <ul>
-            {% for member in training.attended.all %}
-            <li>
-                {{ member.name }} {{ member.first_name }}
-            </li>
-            {% endfor %}
-        </ul>
+        <div id="accordion" class="col-md-12">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h5>
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ training.id }}"
+                                aria-expanded="false" aria-controls="collapse{{ training.id }}" onclick="toggleCollapse('collapseButton{{ training.id }}')">
+                            <i id="collapseButton{{ training.id }}" class="fas fa-sort-down"></i>
+                        </button>
+                        Date: {{ training.date }}
+                        {% if perms.kader.change_member %}
+                        <a href="{% url 'training_edit' training.id %}"><i class="far fa-edit"></i></a>
+                        {% endif %}
+                        {% if perms.kader.delete_member %}
+                        <a href="{% url 'training_delete' training.id %}"><i class="far fa-trash-alt"></i></a>
+                        {% endif %}
+                        <a href="{% url 'training_csv' training.id %}"><i class="fas fa-download"></i></a>
+                    </h5>
+                </div>
+            </div>
+            <div id="collapse{{ training.id }}" class="collapse" aria-labelledby="heading{{ training.id }}"
+                 data-parent="#accordion">
+                <div class="card-body row">
+                    <div class="col-md-4">
+                        <h4>Attendes</h4>
+                        <table class="table table-striped">
+                            {% for member in training.attended.all %}
+                            <tr>
+                                <td>
+                                    {{ member.name }} {{ member.first_name }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                    <div class="col-md-8">
+                        <h4>Fights: {% if perms.kader.add_fight %}
+                            <a href="{% url 'fight_create' training.id %}"><i class="far fa-plus-square"></i></a>
+                            {% endif %}
+                        </h4>
+                        <table class="table table-striped">
+                            {% for fight in training.fights.all %}
+                            <tr>
+                                <td class="col-md-3 text-right">
+                                    {{ fight.white.first_name }} {{ fight.white.name }}
+                                </td>
+                                <td class="col-md-2 text-center">
+                                    {% if fight.white_point_two %}
+                                    {{ fight.white_point_two }}
+                                    {% else %}
+                                    &nbsp;
+                                    {% endif %}
+                                    {% if fight.white_point_one %}
+                                    {{ fight.white_point_one }}
+                                    {% else %}
+                                    &nbsp;
+                                    {% endif %}
+                                </td>
+                                <td class="col-md-2 text-center">
+                                    {% if fight.red_point_one %}
+                                    {{ fight.red_point_one }}
+                                    {% else %}
+                                    &nbsp;
+                                    {% endif %}
+                                    {% if fight.red_point_two %}
+                                    {{ fight.red_point_two }}
+                                    {% else %}
+                                    &nbsp;
+                                    {% endif %}
+                                </td>
+                                <td class="col-md-3 text-left">
+                                    {{ fight.red.first_name }} {{ fight.red.name }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
         {% endfor %}
         {% else %}
         <p>No trainings are available.</p>

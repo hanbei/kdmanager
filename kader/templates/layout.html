@@ -9,6 +9,18 @@
     {# Load CSS and JavaScript #}
     {% bootstrap_css %}
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <script type="text/javascript">
+        function toggleCollapse(id) {
+            icon = $('#'+id)
+            if(icon.hasClass('fa-sort-down')) {
+                icon.removeClass('fa-sort-down');
+                icon.addClass('fa-sort-up');
+            } else {
+                icon.removeClass('fa-sort-up');
+                icon.addClass('fa-sort-down');
+            }
+        }
+    </script>
 </head>
 
 <body>
