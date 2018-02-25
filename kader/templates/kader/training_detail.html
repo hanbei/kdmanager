@@ -2,10 +2,16 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-11">
+    <div class="col-md-5">
         {% if training %}
         <h3>
             Date: {{ training.date }}
+            {% if perms.kader.change_training %}
+            <a href="{% url 'training_edit' training.id %}"><i class="far fa-edit"></i></a>
+            {% endif %}
+            {% if perms.kader.delete_training %}
+            <a href="{% url 'training_delete' training.id %}"><i class="far fa-trash-alt"></i></a>
+            {% endif %}
         </h3>
         <ul>
             {% for member in training.attended.all %}
@@ -15,23 +21,16 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="col-md-1">
-        <h2>
-            {% if perms.kader.change_member %}
-            <a href="{% url 'training_edit' training.id %}"><i class="far fa-edit"></i></a>
-            {% endif %}
-            {% if perms.kader.delete_member %}
-            <a href="{% url 'training_delete' training.id %}"><i class="far fa-trash-alt"></i></a>
+    <div class="col-md-7">
+        <h2>Fights: {% if perms.kader.add_fight %}
+            <a href="{% url 'fight_create' training.id %}"><i class="far fa-plus-square"></i></a>
             {% endif %}
         </h2>
-    </div>
-    <div class="col-md-12">
-        <h2>Fights: <a href="{% url 'fight_create' training.id %}"><i class="far fa-plus-square"></i></a></h2>
         <table>
             {% for fight in training.fights.all %}
             <tr>
                 <td class="col-md-3 text-right">
-                    {{ fight.white.first_name }}{{ fight.white.name }}
+                    {{ fight.white.first_name }} {{ fight.white.name }}
                 </td>
                 <td class="col-md-2 text-right">
                     {% if fight.white_point_two %}
