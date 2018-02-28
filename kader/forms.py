@@ -1,19 +1,19 @@
 from django import forms
 
-from kdmgmt2.kader import models
-from kdmgmt2.kader.models import Member, Fight
+from kader import models
+from kader.models import Member, Fight
 
 
 class MemberForm(forms.Form):
-    name = forms.CharField(max_length=100)
-    first_name = forms.CharField(max_length=100)
-    birth_date = forms.DateField()
-    email = forms.EmailField()
+    name = forms.CharField(max_length=100, attrs={'class': 'form-control'})
+    first_name = forms.CharField(max_length=100, attrs={'class': 'form-control'})
+    birth_date = forms.DateField(attrs={'class': 'form-control'})
+    email = forms.EmailField(attrs={'class': 'form-control'})
 
-    gender = forms.CharField(max_length=1, choices=(("m", "male"), ("f", "female")))
+    gender = forms.CharField(max_length=1, choices=(("m", "male"), ("f", "female")), attrs={'class': 'form-control'})
     active = forms.BooleanField()
 
-    grade = forms.CharField(max_length=10, null=True, blank=True, choices=models.GRADES)
+    grade = forms.CharField(max_length=10, null=True, blank=True, choices=models.GRADES, attrs={'class': 'form-control'})
     zekken = forms.BooleanField()
     jacket = forms.BooleanField()
 
