@@ -2,10 +2,15 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-5">
-        {% if training %}
+    {% if training %}
+    <div class="col-md-12">
         <h3>
             Date: {{ training.date }}
+        </h3>
+    </div>
+    <div class="col-md-5">
+        <h4>
+            Attendes
             {% if perms.kader.change_training %}
             <a href="{% url 'training_edit' training.id %}"><i class="far fa-edit"></i></a>
             {% endif %}
@@ -13,27 +18,30 @@
             <a href="{% url 'training_delete' training.id %}"><i class="far fa-trash-alt"></i></a>
             {% endif %}
             <a href="{% url 'training_csv' training.id %}"><i class="fas fa-download"></i></a>
-        </h3>
-        <ul>
+        </h4>
+        <table class="table table-striped">
             {% for member in training.attended.all %}
-            <li>
-                {{ member.name }} {{ member.first_name }}
-            </li>
+            <tr>
+                <td>
+                    {{ member.name }} {{ member.first_name }}
+                </td>
+            </tr>
             {% endfor %}
-        </ul>
+        </table>
     </div>
     <div class="col-md-7">
-        <h2>Fights: {% if perms.kader.add_fight %}
+        <h4>
+            Fights: {% if perms.kader.add_fight %}
             <a href="{% url 'fight_create' training.id %}"><i class="far fa-plus-square"></i></a>
             {% endif %}
-        </h2>
-        <table>
+        </h4>
+        <table class="table table-striped">
             {% for fight in training.fights.all %}
             <tr>
                 <td class="col-md-3 text-right">
                     {{ fight.white.first_name }} {{ fight.white.name }}
                 </td>
-                <td class="col-md-2 text-right">
+                <td class="col-md-2 text-center">
                     {% if fight.white_point_two %}
                     {{ fight.white_point_two }}
                     {% else %}
@@ -45,7 +53,7 @@
                     &nbsp;
                     {% endif %}
                 </td>
-                <td class="col-md-2 text-left">
+                <td class="col-md-2 text-center">
                     {% if fight.red_point_one %}
                     {{ fight.red_point_one }}
                     {% else %}
