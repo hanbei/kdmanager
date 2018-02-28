@@ -13,6 +13,7 @@ urlpatterns = [
     path('training', views.TrainingListView.as_view(), name='training_list'),
     path('training/create', views.TrainingCreateView.as_view(), name='training_create'),
     path('training/<int:pk>', views.TrainingDetailView.as_view(), name='training_detail'),
+    path('training/<int:pk>/csv', views.export_training_to_csv, name='training_csv'),
     path('training/<int:pk>/edit', views.TrainingUpdateView.as_view(), name='training_edit'),
     path('training/<int:pk>/delete', views.TrainingDeleteView.as_view(), name='training_delete'),
 

@@ -1,0 +1,3 @@
+Name
+{% for row in training.attended.all %}"{{ row.first_name|addslashes }} {{ row.name|addslashes }}"
+{% endfor %}

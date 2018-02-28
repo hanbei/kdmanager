@@ -12,6 +12,7 @@
             {% if perms.kader.delete_training %}
             <a href="{% url 'training_delete' training.id %}"><i class="far fa-trash-alt"></i></a>
             {% endif %}
+            <a href="{% url 'training_csv' training.id %}"><i class="fas fa-download"></i></a>
         </h3>
         <ul>
             {% for member in training.attended.all %}

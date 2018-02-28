@@ -38,13 +38,27 @@ def export_members_to_csv(request):
 
     csv_data = Member.objects.all().order_by('name')
 
-    t = loader.get_template('kader/csv.txt')
+    t = loader.get_template('kader/kader.csv')
     c = {
         'data': csv_data,
     }
     response.write(t.render(c))
     return response
 
+@login_required
+def export_training_to_csv(request, pk):
+    # Create the HttpResponse object with the appropriate CSV header.
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="training.csv"'
+
+    training = get_object_or_404(Training, pk=pk)
+
+    t = loader.get_template('kader/training.csv')
+    c = {
+        'training': training,
+    }
+    response.write(t.render(c))
+    return response
 
 
 class MemberListView(LoginRequiredMixin, generic.ListView):
