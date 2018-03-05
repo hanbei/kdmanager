@@ -13,14 +13,16 @@ class MemberForm(forms.Form):
     gender = forms.CharField(max_length=1, choices=(("m", "male"), ("f", "female")), attrs={'class': 'form-control'})
     active = forms.BooleanField()
 
-    grade = forms.CharField(max_length=10, null=True, blank=True, choices=models.GRADES, attrs={'class': 'form-control'})
+    grade = forms.CharField(max_length=10, null=True, blank=True, choices=models.GRADES,
+                            attrs={'class': 'form-control'})
     zekken = forms.BooleanField()
     jacket = forms.BooleanField()
 
 
 class TrainingForm(forms.Form):
     date = forms.DateField()
-    members = forms.ModelMultipleChoiceField(Member.objects.all())
+    members = forms.ModelMultipleChoiceField(queryset=Member.objects.all(), choices=Member.objects.all(),
+                                             attrs={'size': 20})
 
 
 class FightForm(forms.Form):

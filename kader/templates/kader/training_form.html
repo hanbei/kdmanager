@@ -1,16 +1,32 @@
 {% extends 'layout.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
 <div class="row">
     <div class="col-md-12">
         <h1>Training:</h1>
         <form action="" method="post">
-            <table>
-                {% csrf_token %}
-                {{ form.as_table }}
-            </table>
-            <input type="submit" value="Save"/>
-            <input type="submit" formnovalidate name="cancel" value="Cancel"/>
+            {% csrf_token %}
+            <div class="form-row">
+                {{ form.date.errors }}
+                <label class="col-form-label col-md-1" for="{{ form.date.id_for_label }}">Date:</label>
+                <div class="col-md-3">
+                    {{ form.date|add_class:'form-control' }}
+                </div>
+                {{ form.attended.errors }}
+                <label class="col-form-label col-md-1" for="{{ form.attended.id_for_label }}">Attendees:</label>
+                <div class="col-md-4">
+                    {{ form.attended|add_class:'form-control'|attr:'size:25' }}
+                </div>
+            </div>
+             <div class="form-row mt-4">
+                <div class="col-md-4">
+                    <input type="submit" class="btn btn-success" value="Save"/>
+                </div>
+                <div class="col-md-8">
+                    <input type="submit" class="btn btn-danger" formnovalidate name="cancel" value="Cancel"/>
+                </div>
+            </div>
         </form>
     </div>
 </div>

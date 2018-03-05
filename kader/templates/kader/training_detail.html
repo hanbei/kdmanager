@@ -6,11 +6,6 @@
     <div class="col-md-12">
         <h3>
             Date: {{ training.date }}
-        </h3>
-    </div>
-    <div class="col-md-5">
-        <h4>
-            Attendes
             {% if perms.kader.change_training %}
             <a href="{% url 'training_edit' training.id %}"><i class="far fa-edit"></i></a>
             {% endif %}
@@ -18,6 +13,11 @@
             <a href="{% url 'training_delete' training.id %}"><i class="far fa-trash-alt"></i></a>
             {% endif %}
             <a href="{% url 'training_csv' training.id %}"><i class="fas fa-download"></i></a>
+        </h3>
+    </div>
+    <div class="col-md-5">
+        <h4>
+            Attendes
         </h4>
         <table class="table table-striped">
             {% for member in training.attended.all %}

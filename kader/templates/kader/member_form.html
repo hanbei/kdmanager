@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
 <div class="row">
@@ -10,61 +11,61 @@
                 {{ form.first_name.errors }}
                 <label class="col-form-label col-md-1" for="{{ form.first_name.id_for_label }}">First Name:</label>
                 <div class="col-md-3">
-                    {{ form.first_name }}
+                    {{ form.first_name|add_class:'form-control' }}
                 </div>
                 {{ form.name.errors }}
                 <label class="col-form-label col-md-1" for="{{ form.name.id_for_label }}">Name:</label>
                 <div class="col-md-3">
-                    {{ form.name }}
+                    {{ form.name|add_class:'form-control' }}
                 </div>
             </div>
             <div class="form-row">
                 {{ form.birth_date.errors }}
                 <label class="col-form-label col-md-1" for="{{ form.birth_date.id_for_label }}">Birth Date:</label>
                 <div class="col-md-3">
-                    {{ form.birth_date }}
+                    {{ form.birth_date|add_class:'form-control' }}
                 </div>
                 {{ form.email.errors }}
                 <label class="col-form-label col-md-1" for="{{ form.email.id_for_label }}">Email:</label>
                 <div class="col-md-3">
-                    {{ form.email }}
+                    {{ form.email|add_class:'form-control' }}
                 </div>
             </div>
             <div class="form-row">
                 {{ form.gender.errors }}
                 <label class="col-form-label col-md-1" for="{{ form.gender.id_for_label }}">Gender:</label>
                 <div class="col-md-3">
-                    {{ form.gender }}
+                    {{ form.gender|add_class:'form-control' }}
                 </div>
                 {{ form.grade.errors }}
                 <label class="col-form-label col-md-1" for="{{ form.grade.id_for_label }}">Grade:</label>
                 <div class="col-md-3">
-                    {{ form.grade }}
+                    {{ form.grade|add_class:'form-control' }}
                 </div>
             </div>
             <div class="form-row">
+                {{ form.zekken.errors }}
+                <label class="col-form-label col-md-1" for="{{ form.zekken.id_for_label }}">Zekken:</label>
                 <div class="col-md-2">
-                    {{ form.zekken.errors }}
-                    <label class="col-form-label" for="{{ form.zekken.id_for_label }}">Zekken:</label>
-                    {{ form.zekken }}
+                    {{ form.zekken|add_class:'form-control' }}
                 </div>
+                {{ form.jacket.errors }}
+                <label class="col-form-label col-md-1" for="{{ form.jacket.id_for_label }}">Jacket:</label>
                 <div class="col-md-2">
-                    {{ form.jacket.errors }}
-                    <label class="col-form-label" for="{{ form.jacket.id_for_label }}">Jacket:</label>
-                    {{ form.jacket }}
+                    {{ form.jacket|add_class:'form-control' }}
                 </div>
+                {{ form.active.errors }}
+                <label class="col-form-label" for="{{ form.active.id_for_label }}">Active:</label>
                 <div class="col-md-2">
-                    {{ form.active.errors }}
-                    <label class="col-form-label" for="{{ form.active.id_for_label }}">Active:</label>
-                    {{ form.active }}
+                    {{ form.active|add_class:'form-control' }}
                 </div>
             </div>
-            <div class="form-row">
+            <div class="form-row mt-4">
                 <div class="col-md-4">
-                    <input type="submit" value="Save"/>
+                    <input type="submit" class="btn btn-success" value="Save"/>
                 </div>
                 <div class="col-md-8">
-                    <input type="submit" formnovalidate name="cancel" value="Cancel"/>
+                    <input type="submit" class="btn btn-danger" formnovalidate name="cancel" value="Cancel"/>
                 </div>
             </div>
         </form>
