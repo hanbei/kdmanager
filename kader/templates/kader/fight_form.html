@@ -1,16 +1,54 @@
 {% extends 'layout.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
 <div class="row">
     <div class="col-md-12">
         <h1>Fight:</h1>
         <form action="" method="post">
-            <table>
-                {% csrf_token %}
-                {{ form.as_table }}
-            </table>
-            <input type="submit" value="Save"/>
-            <input type="submit" formnovalidate name="cancel" value="Cancel"/>
+            {% csrf_token %}
+            <div class="form-row">
+                <label class="col-form-label col-md-3 text-center" for="{{ form.white.id_for_label }}">White</label>
+                <label class="col-form-label col-md-1" for="{{ form.white_point_one.id_for_label }}"></label>
+                <label class="col-form-label col-md-1" for="{{ form.white_point_two.id_for_label }}"></label>
+                <label class="col-form-label col-md-1" for="{{ form.red_point_one.id_for_label }}"></label>
+                <label class="col-form-label col-md-1" for="{{ form.red_point_two.id_for_label }}"></label>
+                <label class="col-form-label col-md-3 text-center" for="{{ form.red.id_for_label }}">Red</label>
+            </div>
+            <div class="form-row">
+                {{ form.white.errors }}
+                <div class="col-md-3">
+                    {{ form.white|add_class:'form-control' }}
+                </div>
+                {{ form.white_point_one.errors }}
+                <div class="col-md-1">
+                    {{ form.white_point_one|add_class:'form-control' }}
+                </div>
+                {{ form.white_point_two.errors }}
+                <div class="col-md-1">
+                    {{ form.white_point_two|add_class:'form-control' }}
+                </div>
+                {{ form.red_point_one.errors }}
+                <div class="col-md-1">
+                    {{ form.red_point_one|add_class:'form-control' }}
+                </div>
+                {{ form.red_point_two.errors }}
+                <div class="col-md-1">
+                    {{ form.red_point_two|add_class:'form-control' }}
+                </div>
+                {{ form.red.errors }}
+                <div class="col-md-3">
+                    {{ form.red|add_class:'form-control' }}
+                </div>
+            </div>
+            <div class="form-row justify-content-center mt-4">
+                <div class="col-md-3">
+                    <input type="submit" class="btn btn-success" value="Save"/>
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" class="btn btn-danger" formnovalidate name="cancel" value="Cancel"/>
+                </div>
+            </div>
         </form>
     </div>
 </div>
