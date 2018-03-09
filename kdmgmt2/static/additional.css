@@ -1,0 +1,20 @@
+table.table thead th.orderable {
+    background: url('img/sort.svg') no-repeat center right;
+    background-size: 0.8em;
+}
+
+table.table thead th.id {
+    background: none; !important
+}
+
+
+table.table thead th.asc {
+    background: url('img/sort-down.svg') no-repeat center right;
+    background-size: 0.8em;
+}
+
+table.table thead th.desc {
+    background: url('img/sort-up.svg') no-repeat center right;
+    background-size: 0.8em;
+}
+

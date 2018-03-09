@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {# Load the tag library #}
 {% load bootstrap4 %}
+{% load static %}
 
 <html>
 <head>
@@ -9,6 +10,7 @@
     {# Load CSS and JavaScript #}
     {% bootstrap_css %}
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <link href="{% static 'additional.css' %}" rel="stylesheet">
 </head>
 
 <body>
