@@ -22,7 +22,7 @@ class MemberTable(tables.Table):
     zekken = table.BooleanColumn()
     jacket = table.BooleanColumn()
     active = table.BooleanColumn()
-    id = table.TemplateColumn(link_template, verbose_name='')
+    id = table.TemplateColumn(link_template, verbose_name='', attrs={'th':{'class':'test'}})
 
     class Meta:
         model = Member
