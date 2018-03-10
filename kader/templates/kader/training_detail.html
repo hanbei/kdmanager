@@ -38,34 +38,26 @@
         <table class="table table-striped">
             {% for fight in training.fights.all %}
             <tr>
-                <td class="col-md-3 text-right">
+                <td class="col-xs-3">
                     {{ fight.white.first_name }} {{ fight.white.name }}
                 </td>
-                <td class="col-md-2 text-center">
+                <td class="col-xs-2 text-center">
                     {% if fight.white_point_two %}
                     {{ fight.white_point_two }}
-                    {% else %}
-                    &nbsp;
                     {% endif %}
                     {% if fight.white_point_one %}
                     {{ fight.white_point_one }}
-                    {% else %}
-                    &nbsp;
                     {% endif %}
                 </td>
-                <td class="col-md-2 text-center">
+                <td class="col-xs-2 text-center">
                     {% if fight.red_point_one %}
                     {{ fight.red_point_one }}
-                    {% else %}
-                    &nbsp;
                     {% endif %}
                     {% if fight.red_point_two %}
                     {{ fight.red_point_two }}
-                    {% else %}
-                    &nbsp;
                     {% endif %}
                 </td>
-                <td class="col-md-3 text-left">
+                <td class="col-xs-3 text-right">
                     {{ fight.red.first_name }} {{ fight.red.name }}
                 </td>
             </tr>

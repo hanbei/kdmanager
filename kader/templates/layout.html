@@ -14,7 +14,7 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="navbar-brand">KD Manager</div>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigationbar"
             aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,7 +38,7 @@
         <ul class="navbar-nav">
             {% if user.is_authenticated %}
             <li class="nav-item">
-                <p class="nav navbar-text">Hello {{ user.username }} -</p>
+                <p class="nav navbar-text">Hello {{ user.username }}</p>
             </li>
             {% endif %}
             <li class="nav-item">
@@ -54,7 +54,7 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12">
             {# Display django.contrib.messages as Bootstrap alerts #}
             {% bootstrap_messages %}
         </div>

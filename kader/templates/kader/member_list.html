@@ -4,24 +4,26 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-11">
+    <div class="col-sm-6">
         <h1>Members</h1>
     </div>
-    <div class="col-md-1">
+    <div class="col-sm-6 text-right">
         {% if perms.kader.add_member %}
         <h1><a href="{% url 'create' %}"><i class="far fa-plus-square"></i></a></h1>
         {% endif %}
     </div>
+</div>
+<div class="row">
     {% if members %}
-    <div class="col-md-12 text-right">
+    <div class="col-sm-12 text-right">
         <a href="{% url 'csv_export' %}"><i class="fas fa-download"></i></a>
     </div>
     {% endif %}
-    <div class="col-md-12">
+</div>
+<div class="row">
+    <div class="col-sm-12">
         {% if members %}
-        <div class="col-md-12">
-            {% render_table table %}
-        </div>
+        {% render_table table %}
         {% else %}
         <p>No members are available.</p>
         {% endif %}
