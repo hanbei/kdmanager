@@ -137,3 +137,16 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #LOGIN_URL='/kader/login'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND','django.core.mail.backends.console.EmailBackend')
+
+# Host for sending e-mail.
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.1und1.de')
+
+# Port for sending e-mail.
+EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
+
+# Optional SMTP authentication information for EMAIL_HOST.
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER', 'user@example.com')
+EMAIL_HOST_PASSWORD =  os.environ.get('EMAIL_PASSWORD', 'password')
+EMAIL_USE_TLS = True

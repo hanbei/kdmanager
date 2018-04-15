@@ -11,14 +11,6 @@
     <div class="col-md-12">
         <form action="" method="post">
             {% csrf_token %}
-            <!-- <div class="form-row">
-                <label class="col-form-label col-md-3 text-center" for="{{ form.white.id_for_label }}">White</label>
-                <label class="col-form-label col-md-1" for="{{ form.white_point_one.id_for_label }}"></label>
-                <label class="col-form-label col-md-1" for="{{ form.white_point_two.id_for_label }}"></label>
-                <label class="col-form-label col-md-1" for="{{ form.red_point_one.id_for_label }}"></label>
-                <label class="col-form-label col-md-1" for="{{ form.red_point_two.id_for_label }}"></label>
-                <label class="col-form-label col-md-3 text-center" for="{{ form.red.id_for_label }}">Red</label>
-            </div> -->
             <div class="form-row">
                 {{ form.white.errors }}
                 <div class="col-md-4">

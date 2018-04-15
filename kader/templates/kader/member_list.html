@@ -9,7 +9,10 @@
     </div>
     <div class="col-sm-6 text-right">
         {% if perms.kader.add_member %}
-        <h1><a href="{% url 'create' %}"><i class="far fa-plus-square"></i></a></h1>
+        <h1>
+            <a href="{% url 'send_email' %}"><i class="far fa-envelope"></i></a>
+            <a href="{% url 'create' %}"><i class="far fa-plus-square"></i></a>
+        </h1>
         {% endif %}
     </div>
 </div>

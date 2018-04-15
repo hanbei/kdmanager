@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     path('', views.MemberListView.as_view(), name='home'),
+    path('email', views.send_email, name='send_email'),
     path('csv', views.export_members_to_csv, name='csv_export'),
     path('create/', views.MemberCreate.as_view(), name='create'),
     path('<int:pk>/', views.MemberDetailView.as_view(), name='detail'),

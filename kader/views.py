@@ -5,12 +5,12 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
 from django.urls import reverse, reverse_lazy
-# Create your views here.
 from django.views import generic
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django_tables2 import SingleTableView
 from django_tables2.export import ExportMixin
 
+from kader import forms, email
 from kader.tables import MemberTable
 from .models import Member, Training, Fight
 
@@ -33,6 +33,7 @@ def logout(request):
     auth.logout(request)
     return redirect(reverse('login'))
 
+
 @login_required
 def export_members_to_csv(request):
     # Create the HttpResponse object with the appropriate CSV header.
@@ -47,6 +48,7 @@ def export_members_to_csv(request):
     }
     response.write(t.render(c))
     return response
+
 
 @login_required
 def export_training_to_csv(request, pk):
@@ -207,9 +209,6 @@ class FightCreateView(PermissionRequiredMixin, CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        """
-        Overridden to add the ipsum relation to the `Lorem` instance.
-        """
         form.instance.training = self.training
         return super().form_valid(form)
 
@@ -229,6 +228,7 @@ class FightUpdateView(PermissionRequiredMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('training_detail', args=(self.kwargs['training_pk'],))
 
+
 class FightDeleteView(PermissionRequiredMixin, DeleteView):
     permission_required = 'kader.delete_fight'
     model = Fight
@@ -243,3 +243,20 @@ class FightDeleteView(PermissionRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('training_detail', args=(self.kwargs['training_pk'],))
+
+
+def send_email(request):
+    if request.method == 'POST':
+        form = forms.EmailForm(request.POST)
+
+        if "cancel" in request.POST:
+            print("Cancelled")
+        elif form.is_valid():
+            subject = form.cleaned_data['subject']
+            email_text = form.cleaned_data['email_text']
+            email.send_email(subject, email_text, list(map(lambda member : member.email, Member.objects.all())))
+
+        return redirect(reverse('home'))
+    else:
+        form = forms.EmailForm()
+        return render(request, 'kader/email_form.html', {'form': form})
