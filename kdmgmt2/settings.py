@@ -137,3 +137,5 @@ STATICFILES_DIRS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #LOGIN_URL='/kader/login'
+DATE_FORMAT='d.m.Y'
+SHORT_DATE_FORMAT='d.m.Y'

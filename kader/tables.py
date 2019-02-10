@@ -15,7 +15,7 @@ link_template = '''{% if perms.kader.change_member %}
 class MemberTable(tables.Table):
     name = table.Column()
     first_name = table.Column()
-    birth_date = table.DateColumn()
+    birth_date = table.DateColumn(format='d.m.Y')
     gender = table.Column()
     grade = table.Column()
     email = table.EmailColumn()
